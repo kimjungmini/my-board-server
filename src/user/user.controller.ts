@@ -53,9 +53,9 @@ export class UserController {
     return this.userService.deleteUserByUsername(username);
   }
 
-  // @Post('/test')
-  // @UseGuards(AuthGuard())
-  // test(@GetUser() user: User) {
-  //   console.log(user);
-  // }
+  @Post('/test')
+  @UseGuards(AuthGuard())
+  test(@GetUser() user: User) {
+    console.log(user);
+  }
 }

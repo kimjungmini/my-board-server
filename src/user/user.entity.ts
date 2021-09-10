@@ -1,7 +1,9 @@
+import { Post } from 'src/post/post.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -17,4 +19,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToMany((type) => Post, (post) => post.user, { eager: false })
+  posts: Post[];
 }
