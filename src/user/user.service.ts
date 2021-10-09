@@ -7,9 +7,7 @@ import {
 import { changUserInfo } from './dto/changUserInfo.dto';
 import { signinDTO } from './dto/signin.dto';
 import { signupDto } from './dto/signupDto';
-import { User } from './user.entity';
 import { UserRepository } from './user.repository';
-import * as bycrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -52,7 +50,7 @@ export class UserService {
     const { username, password } = signinDTO;
     const user = await this.userRepository.findOne({ username });
 
-    if (user && (await bycrypt.compare(password, user.password))) {
+    if (user && user.password === password) {
       // 유저 토큰 생성
       const payload = { username };
       const accessToken = await this.jwtService.sign(payload);
